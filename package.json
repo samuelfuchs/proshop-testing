@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/samuelfuchs/proshop-tut#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
