@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { number } from 'yargs'
 
 const orderSchema = mongoose.Schema(
     {
