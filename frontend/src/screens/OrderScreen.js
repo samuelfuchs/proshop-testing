@@ -9,7 +9,7 @@ import Loader from '../components/Loader'
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
     const orderId = match.params.id
 
     const [sdkReady, setSdkReady] = useState(false)
@@ -39,6 +39,9 @@ const OrderScreen = ({ match }) => {
 
 
     useEffect(() => {
+        if(!userInfo) {
+            history.push('/login')
+        }
         const addPayPalScript = async () => {
             const { data: clientId } = await axios.get('/api/config/paypal')
             const script = document.createElement('script')
@@ -181,8 +184,8 @@ const OrderScreen = ({ match }) => {
                                 )}
                             </ListGroup.Item>
                         )}
-                        {loadingDeliver <Loader />}
-                        {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                        {loadingDeliver && <Loader />}
+                        {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                             <ListGroup.Item>
                                 <Button type='button' className='btn btn-block' onClick={deliverHandler}>
                                     Mark as delivered
